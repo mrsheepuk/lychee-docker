@@ -1,12 +1,11 @@
 FROM php:7-apache
 RUN docker-php-ext-install -j$(nproc) session exif mbstring mysqli json && \
         docker-php-ext-enable session exif mbstring mysqli json 
-RUN apt-get update && apt-get install -qq -y libgd-dev libfreetype6-dev libjpeg62-turbo-dev libpng12-dev \
-        docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-        docker-php-ext-install gd
-RUN apt-get update && apt-get install -qq -y libgd-dev libfreetype6-dev libjpeg62-turbo-dev libpng12-dev \
-        docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-        docker-php-ext-install gd
+# todo zip
+RUN apt-get update && apt-get install -qq -y libgd-dev libfreetype6-dev libjpeg62-turbo-dev libpng12-dev && \
+        docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+        docker-php-ext-install gd && \
+        docker-php-ext-enable gd
 RUN a2enmod rewrite
 RUN a2enmod expires
 RUN apt-get update && apt-get install --no-install-recommends -y git
