@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-enable iconv gd session exif mbstring mysqli json zip
 RUN apt-get update && apt-get install -qq --no-install-recommends -y git
 COPY php.ini /usr/local/etc/php.ini
-RUN git clone https://github.com/electerious/Lychee.git /var/www/html
+RUN git clone https://github.com/LycheeOrg/Lychee.git /var/www/html
 RUN chown -R www-data:www-data /var/www/html && chmod -R 777 /var/www/html/uploads /var/www/html/data
 COPY config.php /var/www/html/data/config.php
 VOLUME ["/var/www/html/uploads"]
